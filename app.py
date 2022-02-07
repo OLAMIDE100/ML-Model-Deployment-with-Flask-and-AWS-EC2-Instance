@@ -33,8 +33,8 @@ def predict():
     #creates the single function for getting data
     
     req = request.form
-    country = req.get("country",default='Nigeria')
-    year = int(req.get("year",default=2021))
+    country = req.get("nation")
+    year = int(req.get("year",default=2012))
     status = req.get("status",default= 'Developing')
     adult_mortality = int(req.get("adult_mortality",default=343))
     infant_deaths = int(req.get("infant_deaths",default=72))
@@ -61,16 +61,16 @@ def predict():
     array = numpy.array([country,year,status,adult_mortality,infant_deaths,
                             alcohol,percentage_expenditure, hepatitis_b, measles, bmi, under_five_deaths, polio, total_expenditure,
                             diphtheria, hiv_aids, gdp, thinness_10_19_years, thinness_5_9_years, income_composition_of_resources,  
-                                 schooling, region, incomegroup, population]
+                                schooling, region, incomegroup, population]
                                 ).reshape(1,23)
 
     #creates a dataframe to hold the data and perform transformation
     data = pandas.DataFrame(data=array,columns=['country', 'year', 'status', 'adult_mortality', 'infant_deaths',
-       'alcohol', 'percentage_expenditure', 'hepatitis_b', 'measles', 'bmi',
-       'under-five_deaths', 'polio', 'total_expenditure', 'diphtheria',
-       'hiv/aids', 'gdp', "thinness__1-19_years", 'thinness_5-9_years',
-       'income_composition_of_resources', 'schooling', 'region', 'incomegroup',
-       'Population'])
+    'alcohol', 'percentage_expenditure', 'hepatitis_b', 'measles', 'bmi',
+    'under-five_deaths', 'polio', 'total_expenditure', 'diphtheria',
+    'hiv/aids', 'gdp', "thinness__1-19_years", 'thinness_5-9_years',
+    'income_composition_of_resources', 'schooling', 'region', 'incomegroup',
+    'Population'])
 
     #predict over the features gotten from the user
     prediction = model.predict(data)
